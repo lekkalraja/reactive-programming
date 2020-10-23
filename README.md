@@ -15,3 +15,14 @@ Reactive Programming with RxJava 3.x
     * `Resilient`  : The system stays responsive in the face of failure.
     * `Elastic`    : The system stays responsive under varying workload.
     * `Message Driven` : Reactive Systems rely on asynchronous message-passing to establish a boundary between components that ensures loose coupling, isolation and location transparency.
+    
+    
+# RxJava
+RxJava is a Java VM implementation of Reactive Extensions: a library for composing asynchronous and event-based programs by using observable sequences.
+It extends the `observer pattern` to support sequences of data/events and adds operators that allow you to compose sequences together declaratively while abstracting away concerns about things like low-level threading, synchronization, thread-safety and concurrent data structures.
+
+* RxJava works on PUSH rather than Pull
+* Different channels for different signals
+* RxJava can compose Events by operators
+* RxJava uses Schedulers (concurrent/parallel processing)
+* BackPressure using Flowable
