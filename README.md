@@ -91,3 +91,11 @@ The main difference aside from being a single observable source is that calling 
     - Single => It always either emits one value or an error notification
     - Maybe => 0 or 1 Emission
     - Completable => No Emission
+    
+## Types of Operators
+    - Suppressing Operators : suppress the emissions which fails to meet some specific criteria
+    - Transforming Operators : Transforms the emissions, type of returned observable may not be the same
+    - Reducing Operators : Take a series of emission and reduce them into single emission. Works with finite Observables
+    - Collection Operators : Combine all the emission from upstream to some collection. Reduce emissions to a single collection.
+    - Error-recovery Operators : Used to handle the errors and to recover from them
+    - Action Operators : Used to do debugging in the observable chain
