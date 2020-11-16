@@ -88,14 +88,37 @@ The main difference aside from being a single observable source is that calling 
 ```
 
 ## Observable Variants
-    - Single => It always either emits one value or an error notification
-    - Maybe => 0 or 1 Emission
-    - Completable => No Emission
+    * Single => It always either emits one value or an error notification
+    * Maybe => 0 or 1 Emission
+    * Completable => No Emission
     
 ## Types of Operators
-    - Suppressing Operators : suppress the emissions which fails to meet some specific criteria
-    - Transforming Operators : Transforms the emissions, type of returned observable may not be the same
-    - Reducing Operators : Take a series of emission and reduce them into single emission. Works with finite Observables
-    - Collection Operators : Combine all the emission from upstream to some collection. Reduce emissions to a single collection.
-    - Error-recovery Operators : Used to handle the errors and to recover from them
-    - Action Operators : Used to do debugging in the observable chain
+    * Suppressing Operators : suppress the emissions which fails to meet some specific criteria
+    * Transforming Operators : Transforms the emissions, type of returned observable may not be the same
+    * Reducing Operators : Take a series of emission and reduce them into single emission. Works with finite Observables
+    * Collection Operators : Combine all the emission from upstream to some collection. Reduce emissions to a single collection.
+    * Error-recovery Operators : Used to handle the errors and to recover from them
+    * Action Operators : Used to do debugging in the observable chain
+    
+## Concurrency And Parallelization
+ * The Observable Contract : `The emissions must be passed sequentially and one at a time`
+ 
+ * To run Observer's parallel use `Schedulers`
+ 
+## Schedulers
+    * Computation Scheduler : `Schedulers.computation()` => `Number Of Threads = Number of Available Cores (Runtime.getRunTime().availableProcessors())`
+    * IO Scheduler          : `Schedulers.io()`          => `Number Of Threads > Number of Available Cores`
+    * NewThread Scheduler   : `Schedulers.newThread()`   => `Create 1 Thread per Observer and then destroy the thread when done!`
+    * Single Scheduler      : `Schedulers.single()`      => `Create Only 1 Thread, so to run all the tasks sequentially on that thread`
+    * Trampoline Scheduler  : `Schedulers.trampoline()`  => `Queue's work and execute them in a FIFO manner on one of the participating threads`
+    * From ExecutorService  : `Schedulers.from(executorService)`
+#### subscribeOn
+  * Asynchronously subscribes Observer's to the current Observable on the specified Scheduler.
+  
+#### observeOn
+  * Returns an Observable to perform the current Observable's emissions and notifications on a specified Scheduler, 
+  asynchronously with an unbounded buffer with Flowable#bufferSize() "island size".
+  
+  
+  
+  
