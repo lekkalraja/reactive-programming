@@ -116,9 +116,23 @@ The main difference aside from being a single observable source is that calling 
   * Asynchronously subscribes Observer's to the current Observable on the specified Scheduler.
   
 #### observeOn
-  * Returns an Observable to perform the current Observable's emissions and notifications on a specified Scheduler, 
+  * Returns an Observable to perform the current Observable emissions and notifications on a specified Scheduler, 
   asynchronously with an unbounded buffer with Flowable#bufferSize() "island size".
   
+## Subjects, Replaying & Caching
+  * Replay : Returns a ConnectableObservable that shares a `single subscription` to the current Observable that will replay 
+             all of its items and notifications to any future Observer. A connectable Observable resembles an ordinary 
+             Observable, except that it does `not begin emitting items` when it is subscribed to, 
+             but only when its connect method is called. 
+  * Cache  : Returns an Observable that subscribes to the current Observable lazily, caches all of its events and replays them,
+             in the same order as received, to all the downstream observers.
+             
+  * Subject: `Observable --> (Observer) Subject (Observable) --> Observer`. allows multicasting events from a single source to multiple child Observer's.
+         - `class Subject<T> extends Observable<T> implements Observer<T>`
   
-  
-  
+  #### Type of Subjects
+    * PublishSubject : Start's to emit the source observable items from the moment observer subscribe to it.
+    * ReplaySubject : Emits all the items of the source observable, regardless of when the subscriber subscribes.
+    * BehaviorSubject : Emits the most recent item with the subsequent items of the source observable from the point of subscription.
+    * AsyncSubject : Emits only the last value of the source observable (emits after onComplete() invocation)
+    * UnicastSubject : Buffers all the emissions received by the sources, until an observer subscribes to it (once subscribes, it release buffered emissions and clear it's cache)
