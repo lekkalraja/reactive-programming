@@ -136,3 +136,10 @@ The main difference aside from being a single observable source is that calling 
     * BehaviorSubject : Emits the most recent item with the subsequent items of the source observable from the point of subscription.
     * AsyncSubject : Emits only the last value of the source observable (emits after onComplete() invocation)
     * UnicastSubject : Buffers all the emissions received by the sources, until an observer subscribes to it (once subscribes, it release buffered emissions and clear it's cache)
+    
+## Buffer, Window, Throttle, switchMap
+    * buffer : Gather emissions in specified scope. Emit's each batch or group as a collection type
+    * window : buffer's into other observables rather than collections. Yields Observable of Observables, Emits emissions immediately as soon they become available.
+    * Throttle : throttleFirst(sample)/throttleLast/throttleLatest/throttleTimeout(debounce)
+    * switchMap : Similar to flatMap(), it only subscribes to the last emitted observable, and dispose the previous ones.
+    
